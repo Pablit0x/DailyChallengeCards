@@ -3,6 +3,7 @@ package com.pa.dailychallengecards
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.pa.dailychallengecards.presentation.challenges.ChallengeScreen
 import com.pa.dailychallengecards.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,6 +14,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {}
+
+            ChallengeScreen()
         }
     }
 }
