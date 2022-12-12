@@ -6,7 +6,7 @@ import com.pa.dailychallengecards.domain.repository.ChallengeRepository
 class RollDailySelection(
     private val challengeRepository: ChallengeRepository
 ) {
-    suspend operator fun invoke(
+    operator fun invoke(
         initialStatus: ChallengeStatus,
         desiredStatus: ChallengeStatus,
         numberOfChallenges: Int

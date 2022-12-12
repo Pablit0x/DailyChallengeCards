@@ -5,6 +5,6 @@ data class ChallengeUseCases(
     val getCompletedChallenges: GetCompletedChallenges,
     val updateChallengeStatus: UpdateChallengeStatus,
     val rollDailySelection: RollDailySelection,
-    val resetChallengesStatus: ResetChallengesStatus,
+    val resetDailySelection: ResetDailySelection,
     val addChallenge: AddChallenge
 )

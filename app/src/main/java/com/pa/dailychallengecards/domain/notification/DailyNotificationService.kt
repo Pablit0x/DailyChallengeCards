@@ -1,7 +1,6 @@
 package com.pa.dailychallengecards.domain.notification
 
 
-import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,9 +9,7 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.pa.dailychallengecards.MainActivity
 import com.pa.dailychallengecards.R
-import com.pa.dailychallengecards.util.AlarmReceiver
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.util.*
 import javax.inject.Inject
 
 class DailyNotificationService @Inject constructor(

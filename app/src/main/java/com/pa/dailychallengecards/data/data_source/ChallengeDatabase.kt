@@ -13,7 +13,7 @@ import com.pa.dailychallengecards.domain.model.converters.ChallengeStatusConvert
 )
 
 @TypeConverters(ChallengeDifficultyConverter::class, ChallengeStatusConverter::class)
-abstract class ChallengeDatabase: RoomDatabase() {
+abstract class ChallengeDatabase : RoomDatabase() {
     abstract val challengeDao: ChallengeDao
 
     companion object {

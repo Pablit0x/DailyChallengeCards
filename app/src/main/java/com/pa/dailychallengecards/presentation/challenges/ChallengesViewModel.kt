@@ -4,10 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
 import com.pa.dailychallengecards.domain.use_case.ChallengeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,37 +29,19 @@ class ChallengesViewModel @Inject constructor(
         showCompletedChallenges = false
     }
 
-    private suspend fun getDailySelection() : List<Challenge> {
-        var dailySelection = listOf<Challenge>()
-        challengeUseCases.getDailySelection(activeStatus = ChallengeStatus.Active)
-            .collect { dailyChallenges ->
-                dailySelection = dailyChallenges
-            }
-        return dailySelection
-    }
+    val dailySelection = challengeUseCases.getDailySelection(activeStatus = ChallengeStatus.Active)
 
-    private suspend fun rollDailySelection() {
-        challengeUseCases.rollDailySelection(
-            initialStatus = ChallengeStatus.Idle,
-            desiredStatus = ChallengeStatus.Active,
-            numberOfChallenges = numberOfDailyChallenges
-        )
-    }
+    fun updateChallengeStatus(id: Int, desiredStatus: ChallengeStatus) =
+        viewModelScope.launch(Dispatchers.IO) {
+            challengeUseCases.updateChallengeStatus(id = id, desiredStatus = desiredStatus)
+        }
 
-    private suspend fun resetChallengesStatus() {
-        challengeUseCases.resetChallengesStatus(
-            active = ChallengeStatus.Active,
-            completed = ChallengeStatus.Completed,
-            idle = ChallengeStatus.Idle
-        )
-    }
-
-    private suspend fun updateChallengeStatus(id : Int, desiredStatus : ChallengeStatus){
-        challengeUseCases.updateChallengeStatus(id = id, desiredStatus = desiredStatus)
+    fun addChallenge(challenge: Challenge) = viewModelScope.launch(Dispatchers.IO) {
+        challengeUseCases.addChallenge(challenge = challenge)
     }
 
 
-    companion object{
+    companion object {
         const val numberOfDailyChallenges = 3
     }
 }

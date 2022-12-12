@@ -13,7 +13,7 @@ class AlarmManager @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    private var alarmTime : Calendar
+    private var alarmTime: Calendar
 
     init {
         alarmTime = setAlarmTime()
@@ -45,7 +45,7 @@ class AlarmManager @Inject constructor(
         )
     }
 
-    companion object{
+    companion object {
         const val alarmHour = 8
         const val alarmMinute = 0
         const val alarmSecond = 0

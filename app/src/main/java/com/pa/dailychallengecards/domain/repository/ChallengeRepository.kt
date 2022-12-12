@@ -9,21 +9,21 @@ interface ChallengeRepository {
 
     fun getDailySelection(activeStatus: ChallengeStatus): Flow<List<Challenge>>
 
-    suspend fun rollDailySelection(
+    fun rollDailySelection(
         initialStatus: ChallengeStatus,
         desiredStatus: ChallengeStatus,
         numberOfChallenges: Int
     )
 
-    suspend fun resetChallengesStatus(
+    fun resetDailySelection(
         active: ChallengeStatus,
-        completed: ChallengeStatus,
+        selected: ChallengeStatus,
         idle: ChallengeStatus
     )
 
-    suspend fun updateChallengeStatus(id: Int, desiredStatus: ChallengeStatus)
+    fun updateChallengeStatus(id: Int, desiredStatus: ChallengeStatus)
 
     fun getCompletedChallenges(completedStatus: ChallengeStatus): Flow<List<Challenge>>
 
-    suspend fun addChallenge(challenge: Challenge)
+    fun addChallenge(challenge: Challenge)
 }

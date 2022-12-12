@@ -7,12 +7,12 @@ import com.pa.dailychallengecards.domain.model.ChallengeDifficulty
 class ChallengeDifficultyConverter {
 
     @TypeConverter
-    fun fromChallengeDifficulty(challengeDifficulty: ChallengeDifficulty) : Int{
+    fun fromChallengeDifficulty(challengeDifficulty: ChallengeDifficulty): Int {
         return challengeDifficulty.difficultyIdentifierIcon
     }
 
     @TypeConverter
-    fun fromInt(challengeDifficulty: Int) : ChallengeDifficulty{
+    fun fromInt(challengeDifficulty: Int): ChallengeDifficulty {
         val difficulty = when (challengeDifficulty) {
             R.drawable.easy_challenge -> ChallengeDifficulty.EASY
             R.drawable.medium_challenge -> ChallengeDifficulty.MEDIUM

@@ -1,18 +1,18 @@
 package com.pa.dailychallengecards.di
 
 import android.app.Application
+import androidx.room.Room
 import com.pa.dailychallengecards.data.data_source.ChallengeDatabase
+import com.pa.dailychallengecards.data.repository.ChallengeRepositoryImpl
 import com.pa.dailychallengecards.domain.notification.DailyNotificationService
 import com.pa.dailychallengecards.domain.repository.ChallengeRepository
+import com.pa.dailychallengecards.domain.use_case.*
+import com.pa.dailychallengecards.util.AlarmManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import androidx.room.Room
-import com.pa.dailychallengecards.data.repository.ChallengeRepositoryImpl
-import com.pa.dailychallengecards.domain.use_case.*
-import com.pa.dailychallengecards.util.AlarmManager
 
 
 @Module
@@ -43,7 +43,7 @@ object AppModule {
             getCompletedChallenges = GetCompletedChallenges(repository),
             updateChallengeStatus = UpdateChallengeStatus(repository),
             rollDailySelection = RollDailySelection(repository),
-            resetChallengesStatus = ResetChallengesStatus(repository),
+            resetDailySelection = ResetDailySelection(repository),
             addChallenge = AddChallenge(repository)
         )
     }

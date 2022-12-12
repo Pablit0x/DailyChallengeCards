@@ -6,7 +6,7 @@ import com.pa.dailychallengecards.domain.repository.ChallengeRepository
 class UpdateChallengeStatus(
     private val challengeRepository: ChallengeRepository
 ) {
-    suspend operator fun invoke(id: Int, desiredStatus: ChallengeStatus) {
+    operator fun invoke(id: Int, desiredStatus: ChallengeStatus) {
         challengeRepository.updateChallengeStatus(id = id, desiredStatus = desiredStatus)
     }
 }

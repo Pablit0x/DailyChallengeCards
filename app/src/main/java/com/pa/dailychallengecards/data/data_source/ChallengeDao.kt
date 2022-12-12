@@ -12,19 +12,27 @@ import kotlinx.coroutines.flow.Flow
 interface ChallengeDao {
 
     @Query("UPDATE challenge SET status =:desiredStatus WHERE id IN ( SELECT id FROM challenge WHERE status = :initialStatus ORDER BY RANDOM() LIMIT :numberOfChallenges )")
-    suspend fun rollDailySelection(initialStatus: ChallengeStatus, desiredStatus: ChallengeStatus, numberOfChallenges : Int)
+    fun rollDailySelection(
+        initialStatus: ChallengeStatus,
+        desiredStatus: ChallengeStatus,
+        numberOfChallenges: Int
+    )
 
     @Query("SELECT * FROM challenge WHERE status =:activeStatus")
     fun getDailySelection(activeStatus: ChallengeStatus): Flow<List<Challenge>>
 
-    @Query("UPDATE challenge SET status =:idle WHERE status = :active OR status =:completed")
-    suspend fun resetChallengesStatus(active : ChallengeStatus, completed : ChallengeStatus, idle : ChallengeStatus)
+    @Query("UPDATE challenge SET status =:idle WHERE status = :active OR status =:selected")
+    fun resetDailySelection(
+        active: ChallengeStatus,
+        selected: ChallengeStatus,
+        idle: ChallengeStatus
+    )
 
     @Query("UPDATE challenge SET status=:desiredStatus WHERE id =:id")
-    suspend fun updateChallengeStatus(id : Int, desiredStatus: ChallengeStatus)
+    fun updateChallengeStatus(id: Int, desiredStatus: ChallengeStatus)
 
     @Query("SELECT * FROM challenge WHERE status =:completedStatus")
-    fun getCompletedChallenges(completedStatus: ChallengeStatus) : Flow<List<Challenge>>
+    fun getCompletedChallenges(completedStatus: ChallengeStatus): Flow<List<Challenge>>
 
     @Insert
     fun addChallenge(challenge: Challenge)

@@ -3,17 +3,17 @@ package com.pa.dailychallengecards.domain.use_case
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
 import com.pa.dailychallengecards.domain.repository.ChallengeRepository
 
-class ResetChallengesStatus(
+class ResetDailySelection(
     private val challengeRepository: ChallengeRepository
 ) {
-    suspend operator fun invoke(
+    operator fun invoke(
         active: ChallengeStatus,
-        completed: ChallengeStatus,
+        selected: ChallengeStatus,
         idle: ChallengeStatus
     ) =
-        challengeRepository.resetChallengesStatus(
+        challengeRepository.resetDailySelection(
             active = active,
-            completed = completed,
+            selected = selected,
             idle = idle
         )
 }
