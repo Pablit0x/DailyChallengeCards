@@ -11,3 +11,7 @@ val Teal200 = Color(0xFF03DAC5)
 val text_color = Color.White
 val question_mark_color = Color(0xFF5C5B5B)
 val unselected_card_background_color = Color(0xFF8D8D8C)
+val orange = Color(0xFFFF6F00)
+
+
+val EASY = Color(0xFF39A6B9)

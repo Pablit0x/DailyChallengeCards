@@ -2,6 +2,7 @@ package com.pa.dailychallengecards
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.graphics.Color
@@ -19,11 +20,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            //Customize Status
-            val view = LocalView.current
-            val window = (view.context as Activity).window
-            val insets = WindowCompat.getInsetsController(window, view)
-            window.statusBarColor = Color.Transparent.toArgb()
+            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            window.setDecorFitsSystemWindows(false)
 
             AppTheme {}
 
