@@ -1,4 +1,4 @@
-package com.pa.dailychallengecards.domain.model.converter
+package com.pa.dailychallengecards.domain.model.converters
 
 import androidx.room.TypeConverter
 import com.pa.dailychallengecards.R

@@ -11,7 +11,8 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import androidx.room.Room
 import com.pa.dailychallengecards.data.repository.ChallengeRepositoryImpl
-
+import com.pa.dailychallengecards.domain.use_case.*
+import com.pa.dailychallengecards.util.AlarmManager
 
 
 @Module
@@ -34,6 +35,19 @@ object AppModule {
         return ChallengeRepositoryImpl(db.challengeDao)
     }
 
+    @Provides
+    @Singleton
+    fun provideChallengeUseCases(repository: ChallengeRepository): ChallengeUseCases {
+        return ChallengeUseCases(
+            getDailySelection = GetDailySelection(challengeRepository = repository),
+            getCompletedChallenges = GetCompletedChallenges(repository),
+            updateChallengeStatus = UpdateChallengeStatus(repository),
+            rollDailySelection = RollDailySelection(repository),
+            resetChallengesStatus = ResetChallengesStatus(repository),
+            addChallenge = AddChallenge(repository)
+        )
+    }
+
 
     @Singleton
     @Provides
@@ -41,5 +55,13 @@ object AppModule {
         context: Application
     ): DailyNotificationService {
         return DailyNotificationService(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAlarmManager(
+        context: Application
+    ): AlarmManager {
+        return AlarmManager(context)
     }
 }

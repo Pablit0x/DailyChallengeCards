@@ -8,10 +8,13 @@ buildscript {
         room_version = '2.4.3'
         kotlin_coroutines_version = '1.6.4'
         leak_canary_version = '2.8.1'
+        kotlin_version = "1.5.10"
     }
     dependencies {
         //Dagger Hilt
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.44.2"
+        // Gradle
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
