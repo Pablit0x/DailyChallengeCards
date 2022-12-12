@@ -1,21 +1,16 @@
 package com.pa.dailychallengecards
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.pa.dailychallengecards.domain.model.Challenge
-import com.pa.dailychallengecards.domain.model.ChallengeDifficulty
-import com.pa.dailychallengecards.domain.model.ChallengeStatus
-import com.pa.dailychallengecards.domain.use_case.ChallengeUseCases
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+import com.pa.dailychallengecards.presentation.challenges.ChallengeScreen
 import com.pa.dailychallengecards.ui.theme.AppTheme
-import com.pa.dailychallengecards.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -23,7 +18,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            //Customize Status
+            val view = LocalView.current
+            val window = (view.context as Activity).window
+            val insets = WindowCompat.getInsetsController(window, view)
+            window.statusBarColor = Color.Transparent.toArgb()
+
             AppTheme {}
+
+            ChallengeScreen()
         }
     }
 }
