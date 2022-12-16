@@ -10,6 +10,7 @@ import com.pa.dailychallengecards.presentation.challenges.ChallengesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,23 +26,17 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         dailyNotificationService.displayDailyNotification()
-        resetDailySelection()
         rollDailySelection()
     }
 
-
-    private fun resetDailySelection() {
+    private fun rollDailySelection() {
         GlobalScope.launch {
             challengesUseCases.resetDailySelection.invoke(
                 active = ChallengeStatus.Active,
                 selected = ChallengeStatus.Selected,
                 idle = ChallengeStatus.Idle
             )
-        }
-    }
-
-    private fun rollDailySelection() {
-        GlobalScope.launch {
+            delay(1000)
             challengesUseCases.rollDailySelection.invoke(
                 initialStatus = ChallengeStatus.Idle,
                 desiredStatus = ChallengeStatus.Active,
