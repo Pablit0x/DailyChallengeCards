@@ -27,7 +27,7 @@ import com.pa.dailychallengecards.R
 import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeDifficulty
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
-import com.pa.dailychallengecards.presentation.components.ChallengeCard
+import com.pa.dailychallengecards.presentation.components.ChallengeCards
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -123,7 +123,7 @@ fun ChallengesScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            ChallengeCard(dailySelection)
+            ChallengeCards(dailySelection)
 
             Spacer(modifier = Modifier.height(8.dp))
 

@@ -40,7 +40,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun ChallengeCard(
+fun ChallengeCards(
     dailySelection: List<Challenge>
 ) {
     var order by remember { mutableStateOf(listOf(0, 1, 2)) }
@@ -91,12 +91,12 @@ fun SwipeableCard(
             .swipeToBack { onSwipe() }
             .border(2.dp, Color.Black, shape = Shapes.large)
     ) {
-        SampleCard(challenge = challenge, backgroundColor = backgroundColor)
+        ChallengeCard(challenge = challenge, backgroundColor = backgroundColor)
     }
 }
 
 @Composable
-fun SampleCard(challenge: Challenge, backgroundColor: Color = Color.White) {
+fun ChallengeCard(challenge: Challenge, backgroundColor: Color = Color.White) {
     Card(
         modifier = Modifier
             .height(400.dp)
