@@ -26,4 +26,6 @@ interface ChallengeRepository {
     fun getCompletedChallenges(completedStatus: ChallengeStatus): Flow<List<Challenge>>
 
     fun addChallenge(challenge: Challenge)
+
+    fun deleteAllChallenges()
 }

@@ -1,6 +1,7 @@
 package com.pa.dailychallengecards.data.data_source
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.pa.dailychallengecards.domain.model.Challenge
@@ -36,4 +37,7 @@ interface ChallengeDao {
 
     @Insert
     fun addChallenge(challenge: Challenge)
+
+    @Query("DELETE FROM Challenge")
+    fun deleteAllChallenges()
 }
