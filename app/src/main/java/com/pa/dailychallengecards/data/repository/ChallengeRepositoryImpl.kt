@@ -37,4 +37,8 @@ class ChallengeRepositoryImpl(
         challengeDao.getCompletedChallenges(completedStatus = completedStatus)
 
     override fun addChallenge(challenge: Challenge) = challengeDao.addChallenge(challenge)
+
+    override fun deleteAllChallenges() {
+        challengeDao.deleteAllChallenges()
+    }
 }

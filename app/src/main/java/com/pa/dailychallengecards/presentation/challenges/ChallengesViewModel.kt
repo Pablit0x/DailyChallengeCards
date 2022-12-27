@@ -40,6 +40,10 @@ class ChallengesViewModel @Inject constructor(
         challengeUseCases.addChallenge(challenge = challenge)
     }
 
+    fun deleteAllChallenges() = viewModelScope.launch(Dispatchers.IO){
+        challengeUseCases.deleteAllChallenges()
+    }
+
 
     companion object {
         const val numberOfDailyChallenges = 3

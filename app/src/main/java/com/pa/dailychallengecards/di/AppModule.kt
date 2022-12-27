@@ -44,7 +44,8 @@ object AppModule {
             updateChallengeStatus = UpdateChallengeStatus(repository),
             rollDailySelection = RollDailySelection(repository),
             resetDailySelection = ResetDailySelection(repository),
-            addChallenge = AddChallenge(repository)
+            addChallenge = AddChallenge(repository),
+            deleteAllChallenges = DeleteAllChallenges(repository)
         )
     }
 
