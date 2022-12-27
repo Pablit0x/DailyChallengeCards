@@ -47,7 +47,7 @@ fun ChallengesScreen(
         dailySelection.forEach {
             result += "ID = ${it.id}, TITLE = ${it.title}, DESCRIPTION = ${it.description} \n\n"
         }
-        Text(text = result)
+        Text(text = result, color = Color.White)
         }
 
 
