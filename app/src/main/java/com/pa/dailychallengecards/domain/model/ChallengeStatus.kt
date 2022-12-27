@@ -6,4 +6,6 @@ sealed class ChallengeStatus(val name: String) {
     object Active : ChallengeStatus(name = "Active")
 
     object Idle : ChallengeStatus(name = "Idle")
+
+    object Selected : ChallengeStatus(name = "Selected")
 }

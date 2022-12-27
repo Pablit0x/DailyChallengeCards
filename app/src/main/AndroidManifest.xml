@@ -32,7 +32,7 @@
                 android:value="" />
         </activity>
 
-        <receiver android:name=".domain.notification.AlarmReceiver"/>
+        <receiver android:name=".util.AlarmReceiver"/>
 
     </application>
 

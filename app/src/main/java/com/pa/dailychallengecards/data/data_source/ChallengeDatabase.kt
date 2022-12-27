@@ -4,8 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.pa.dailychallengecards.domain.model.Challenge
-import com.pa.dailychallengecards.domain.model.converter.ChallengeDifficultyConverter
-import com.pa.dailychallengecards.domain.model.converter.ChallengeStatusConverter
+import com.pa.dailychallengecards.domain.model.converters.ChallengeDifficultyConverter
+import com.pa.dailychallengecards.domain.model.converters.ChallengeStatusConverter
 
 @Database(
     entities = [Challenge::class],
@@ -13,7 +13,7 @@ import com.pa.dailychallengecards.domain.model.converter.ChallengeStatusConverte
 )
 
 @TypeConverters(ChallengeDifficultyConverter::class, ChallengeStatusConverter::class)
-abstract class ChallengeDatabase: RoomDatabase() {
+abstract class ChallengeDatabase : RoomDatabase() {
     abstract val challengeDao: ChallengeDao
 
     companion object {

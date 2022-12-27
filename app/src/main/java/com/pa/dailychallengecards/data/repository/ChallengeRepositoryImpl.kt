@@ -4,36 +4,41 @@ import com.pa.dailychallengecards.data.data_source.ChallengeDao
 import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
 import com.pa.dailychallengecards.domain.repository.ChallengeRepository
-import kotlinx.coroutines.flow.Flow
 
 class ChallengeRepositoryImpl(
     private val challengeDao: ChallengeDao
 ) : ChallengeRepository {
 
-    override fun getDailySelection(): Flow<List<Challenge>> {
-        return challengeDao.getDailySelection()
-    }
+    override fun getDailySelection(activeStatus: ChallengeStatus) =
+        challengeDao.getDailySelection(activeStatus = activeStatus)
 
-    override suspend fun updateChallengeStatus(
+    override fun rollDailySelection(
+        initialStatus: ChallengeStatus,
+        desiredStatus: ChallengeStatus,
+        numberOfChallenges: Int
+    ) = challengeDao.rollDailySelection(
+        initialStatus = initialStatus,
+        desiredStatus = desiredStatus,
+        numberOfChallenges = numberOfChallenges
+    )
+
+    override fun resetDailySelection(
+        active: ChallengeStatus,
+        selected: ChallengeStatus,
+        idle: ChallengeStatus
+    ) = challengeDao.resetDailySelection(active = active, selected = selected, idle = idle)
+
+    override fun updateChallengeStatus(
         id: Int,
-        challengeStatus: ChallengeStatus
-    ) {
-        challengeDao.updateChallengeStatus(id = id, challengeStatus = challengeStatus)
-    }
+        desiredStatus: ChallengeStatus
+    ) = challengeDao.updateChallengeStatus(id = id, desiredStatus = desiredStatus)
 
-    override fun getChallengesByChallengeStatus(challengeStatus: ChallengeStatus): Flow<List<Challenge>> {
-        return challengeDao.getChallengesByChallengeStatus(challengeStatus = challengeStatus)
-    }
+    override fun getCompletedChallenges(completedStatus: ChallengeStatus) =
+        challengeDao.getCompletedChallenges(completedStatus = completedStatus)
 
-    override fun getAllChallenges(): Flow<List<Challenge>> {
-        return challengeDao.getAllChallenges()
-    }
+    override fun addChallenge(challenge: Challenge) = challengeDao.addChallenge(challenge)
 
-    override suspend fun addChallenge(challenge: Challenge) {
-        challengeDao.addChallenge(challenge = challenge)
-    }
-
-    override suspend fun deleteChallenge(challengeId: Int) {
-        challengeDao.deleteChallenge(challengeId = challengeId)
+    override fun deleteAllChallenges() {
+        challengeDao.deleteAllChallenges()
     }
 }

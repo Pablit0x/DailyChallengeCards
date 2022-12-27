@@ -1,118 +1,106 @@
 package com.pa.dailychallengecards.presentation.challenges
 
-import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Card
-import androidx.compose.material3.Text
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.pa.dailychallengecards.R
 import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeDifficulty
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
-import com.pa.dailychallengecards.presentation.components.ChallengeCard
-import com.pa.dailychallengecards.presentation.components.UnselectedChallengeCard
-import com.pa.dailychallengecards.ui.theme.EASY
-import com.pa.dailychallengecards.ui.theme.orange
 
 @Composable
-fun ChallengeScreen(){
-    var isChallengeSelected: Boolean by remember { mutableStateOf(false) }
-    var c : Int by remember { mutableStateOf(0) }
-
-    val backgroundPainter = painterResource(id = com.pa.dailychallengecards.R.drawable.lol2)
-    val arrowPainter = painterResource(id = com.pa.dailychallengecards.R.drawable.ic_baseline_keyboard_arrow_down_48)
-
-    val mockChallenge = Challenge(
-        id = 0,
-        description = "mock challenge",
-        title = "be kind",
-        difficulty = ChallengeDifficulty.EASY,
-        image = com.pa.dailychallengecards.R.drawable.asd,
-        status = ChallengeStatus.Active
+fun ChallengesScreen(
+    viewModel: ChallengesViewModel = hiltViewModel()
+) {
+    val dailySelection by viewModel.dailySelection.collectAsState(
+        initial = emptyList()
     )
+    var tempInt by remember { mutableStateOf(0) }
 
-    Box(
+    //Background
+    Column(
         modifier = Modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ){
+            .fillMaxSize()
+            .background(Color.Gray),
+    ) {
+    }
 
-//        Image(
-//            modifier = Modifier
-//                .fillMaxSize(),
-//            painter = backgroundPainter,
-//            contentDescription = "background",
-//            contentScale = ContentScale.Crop
-//        )
+    //Challenge presentation
+    Column(
+        modifier = Modifier.fillMaxSize(),
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xFF363636))
-        )
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
 
-        var color = when(c){
-            0 -> Color(0xFF474747)
-            1 -> EASY
-            else -> Color(0xFF39A6B9)
+        var result = ""
+        dailySelection.forEach {
+            result += "ID = ${it.id}, TITLE = ${it.title}, DESCRIPTION = ${it.description} \n\n"
+        }
+        Text(text = result, color = Color.White)
         }
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.3f)
-                .background(color)
-        )
 
-//
-//        Row(
-//            modifier = Modifier
-//                .fillMaxHeight()
-//                .offset(0.dp, 180.dp),
-//            verticalAlignment = Alignment.Top) {
-//            Text(
-//                text = "Your Current Challenge is...",
-//                fontSize = 35.sp,
-//                color = Color.White
-//            )
-//
-//        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(0.745f)
-                .fillMaxHeight(0.46f)
-                .clickable {
-                    isChallengeSelected = !isChallengeSelected
-                    c = if (isChallengeSelected) 1 else 0
-                }
+    //Challenge Admin options
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(0.dp, 0.dp, 0.dp, 80.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
         ) {
-            if(isChallengeSelected){
-                ChallengeCard(mockChallenge)
-            } else {
-                UnselectedChallengeCard()
+        Row(
+            modifier = Modifier
+                .fillMaxHeight(0.05f)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.1f),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                onClick = { tempInt = addChallenge(tempInt, viewModel) }
+            ) {
+                Text(text = "+")
+            }
+
+            Button(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.1f),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                onClick = { viewModel.deleteAllChallenges() }
+            ) {
+                Text(text = "-")
             }
         }
-
-
-        Image(
-            modifier = Modifier
-                .fillMaxHeight(0.96f),
-
-            painter = arrowPainter,
-            contentDescription = "",
-            alignment = Alignment.BottomCenter
-        )
     }
+    }
+
+
+fun addChallenge(id : Int, viewModel: ChallengesViewModel) : Int{
+    val newId = id + 1
+
+    val newChallenge = Challenge(
+        id = id,
+        title = "Test: $id",
+        description = "TestDescription",
+        image = R.drawable.the_background_image,
+        difficulty = ChallengeDifficulty.EASY,
+        status = ChallengeStatus.Active
+    )
+    viewModel.addChallenge(newChallenge)
+
+    return newId
 }

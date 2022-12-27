@@ -7,18 +7,25 @@ import kotlinx.coroutines.flow.Flow
 
 interface ChallengeRepository {
 
-    fun getDailySelection(): Flow<List<Challenge>>
+    fun getDailySelection(activeStatus: ChallengeStatus): Flow<List<Challenge>>
 
-    suspend fun updateChallengeStatus(id : Int, challengeStatus: ChallengeStatus)
+    fun rollDailySelection(
+        initialStatus: ChallengeStatus,
+        desiredStatus: ChallengeStatus,
+        numberOfChallenges: Int
+    )
 
-    fun getChallengesByChallengeStatus(challengeStatus: ChallengeStatus) : Flow<List<Challenge>>
+    fun resetDailySelection(
+        active: ChallengeStatus,
+        selected: ChallengeStatus,
+        idle: ChallengeStatus
+    )
 
+    fun updateChallengeStatus(id: Int, desiredStatus: ChallengeStatus)
 
+    fun getCompletedChallenges(completedStatus: ChallengeStatus): Flow<List<Challenge>>
 
-    // Admin Queries
-    fun getAllChallenges(): Flow<List<Challenge>>
+    fun addChallenge(challenge: Challenge)
 
-    suspend fun addChallenge(challenge: Challenge)
-
-    suspend fun deleteChallenge(challengeId: Int)
+    fun deleteAllChallenges()
 }

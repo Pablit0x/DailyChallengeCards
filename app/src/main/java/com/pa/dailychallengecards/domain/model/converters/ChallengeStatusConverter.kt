@@ -1,4 +1,4 @@
-package com.pa.dailychallengecards.domain.model.converter
+package com.pa.dailychallengecards.domain.model.converters
 
 import androidx.room.TypeConverter
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
@@ -16,6 +16,7 @@ class ChallengeStatusConverter {
             "Idle" -> ChallengeStatus.Idle
             "Active" -> ChallengeStatus.Active
             "Completed" -> ChallengeStatus.Completed
+            "Selected" -> ChallengeStatus.Selected
             else -> ChallengeStatus.Idle
         }
         return status
