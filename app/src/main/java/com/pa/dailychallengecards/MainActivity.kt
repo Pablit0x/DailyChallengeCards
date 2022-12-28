@@ -5,6 +5,7 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.pa.dailychallengecards.presentation.challenges.ChallengesScreen
+import com.pa.dailychallengecards.presentation.components.SelectionDialog
 import com.pa.dailychallengecards.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

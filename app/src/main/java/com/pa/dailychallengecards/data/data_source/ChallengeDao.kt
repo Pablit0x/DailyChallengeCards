@@ -40,4 +40,7 @@ interface ChallengeDao {
 
     @Query("DELETE FROM Challenge")
     fun deleteAllChallenges()
+
+    @Query("SELECT * FROM Challenge Where status =:status")
+    fun getCurrentlySelected(status: ChallengeStatus): Flow<Challenge>
 }

@@ -4,6 +4,7 @@ import com.pa.dailychallengecards.data.data_source.ChallengeDao
 import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeStatus
 import com.pa.dailychallengecards.domain.repository.ChallengeRepository
+import kotlinx.coroutines.flow.Flow
 
 class ChallengeRepositoryImpl(
     private val challengeDao: ChallengeDao
@@ -41,4 +42,7 @@ class ChallengeRepositoryImpl(
     override fun deleteAllChallenges() {
         challengeDao.deleteAllChallenges()
     }
+
+    override fun getCurrentlySelected() =
+        challengeDao.getCurrentlySelected(status = ChallengeStatus.Selected)
 }

@@ -28,4 +28,6 @@ interface ChallengeRepository {
     fun addChallenge(challenge: Challenge)
 
     fun deleteAllChallenges()
+
+    fun getCurrentlySelected(): Flow<Challenge>
 }

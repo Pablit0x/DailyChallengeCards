@@ -45,7 +45,8 @@ object AppModule {
             rollDailySelection = RollDailySelection(repository),
             resetDailySelection = ResetDailySelection(repository),
             addChallenge = AddChallenge(repository),
-            deleteAllChallenges = DeleteAllChallenges(repository)
+            deleteAllChallenges = DeleteAllChallenges(repository),
+            getCurrentSelected = GetCurrentSelected(repository)
         )
     }
 

@@ -14,4 +14,7 @@ val unselected_card_background_color = Color(0xFF8D8D8C)
 val orange = Color(0xFFFF6F00)
 
 
-val EASY = Color(0xFF39A6B9)
+val COLOUREASY = Color(0xFFFFFFFF)
+val COLOURMEDIUM = Color(0xFFFFBF00)
+val COLOURHARD = Color(0xFF373638)
+

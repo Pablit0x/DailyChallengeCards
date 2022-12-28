@@ -31,6 +31,9 @@ class ChallengesViewModel @Inject constructor(
 
     val dailySelection = challengeUseCases.getDailySelection(activeStatus = ChallengeStatus.Active)
 
+    val getSelectedChallenge = challengeUseCases.getCurrentSelected(activeStatus = ChallengeStatus.Active)
+
+
     fun updateChallengeStatus(id: Int, desiredStatus: ChallengeStatus) =
         viewModelScope.launch(Dispatchers.IO) {
             challengeUseCases.updateChallengeStatus(id = id, desiredStatus = desiredStatus)
@@ -43,7 +46,6 @@ class ChallengesViewModel @Inject constructor(
     fun deleteAllChallenges() = viewModelScope.launch(Dispatchers.IO){
         challengeUseCases.deleteAllChallenges()
     }
-
 
     companion object {
         const val numberOfDailyChallenges = 3
