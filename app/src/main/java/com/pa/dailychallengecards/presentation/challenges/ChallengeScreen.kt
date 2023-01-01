@@ -55,7 +55,7 @@ fun ChallengesScreen(
         SelectionDialog(
             dismiss = {openDialog = false},
             selectChallenge = {
-                viewModel.updateChallengeStatus(it, ChallengeStatus.Selected)
+                viewModel.updateChallengeStatus(it, ChallengeStatus.Selected)  //TODO MAKE OTHER CHALLENGES ACTIVE/COMPLETED
                 viewModel.startClock() },
             threeChallenges = dailySelection.take(3)
         )
@@ -116,13 +116,7 @@ fun ChallengesScreen(
                 modifier = Modifier
                     .fillMaxHeight(),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                onClick = {
-//                    viewModel.updateChallengeStatus(dailySelection.random().id!!,ChallengeStatus.Selected)
-//                    viewModel.startClock()
-                    openDialog = true
-
-                //TODO MAKE OTHER CHALLENGES ACTIVE/COMPLETED
-                }
+                onClick = { openDialog = true }
             ) {
                 Text(text = "Roll [${dailySelection.size}]")
             }

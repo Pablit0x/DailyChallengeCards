@@ -20,7 +20,6 @@ import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeDifficulty
 import com.pa.dailychallengecards.ui.theme.COLOUREASY
 import com.pa.dailychallengecards.ui.theme.COLOURHARD
-import kotlinx.coroutines.delay
 import java.time.Duration
 import java.time.format.DateTimeFormatter
 
@@ -61,14 +60,6 @@ fun ChallengeCard(
         color = Color.White
         colorText = Color.Black
     }
-
-    val painter = painterResource(
-        id = R.drawable.asd
-    )
-    val painter1 = painterResource(
-        id = R.drawable.ic_outline_sports_volleyball_24
-    )
-
 
     Card(
         modifier = Modifier
