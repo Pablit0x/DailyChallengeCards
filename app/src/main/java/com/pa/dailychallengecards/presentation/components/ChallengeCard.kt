@@ -1,36 +1,37 @@
 package com.pa.dailychallengecards.presentation.components
 
-import androidx.compose.foundation.Image
-import com.pa.dailychallengecards.R
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Switch
 import androidx.compose.material.Text
-import androidx.compose.material3.AlertDialogDefaults.shape
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.ResourceFont
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pa.dailychallengecards.R
 import com.pa.dailychallengecards.domain.model.Challenge
 import com.pa.dailychallengecards.domain.model.ChallengeDifficulty
 import com.pa.dailychallengecards.ui.theme.COLOUREASY
 import com.pa.dailychallengecards.ui.theme.COLOURHARD
+import kotlinx.coroutines.delay
+import java.time.Duration
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun ChallengeCard(
-    challenge: Challenge?
+    challenge: Challenge?,
+    timeLeft : Duration
 ) {
+
+    var time : String = ""+ timeLeft.toHours() +":"+ timeLeft.toMinutesPart() +":"+ timeLeft.toSecondsPart()
 
     var fonts = FontFamily(
         Font(R.font.bebasneue_regular)
@@ -38,6 +39,7 @@ fun ChallengeCard(
     var output = ""
     var color : Color
     var colorText : Color
+    val f :DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
     if(!challenge?.description.isNullOrEmpty()){
         output = challenge!!.id.toString()
         when(challenge!!.difficulty){
@@ -66,6 +68,8 @@ fun ChallengeCard(
     val painter1 = painterResource(
         id = R.drawable.ic_outline_sports_volleyball_24
     )
+
+
     Card(
         modifier = Modifier
             .fillMaxSize(),
@@ -79,21 +83,35 @@ fun ChallengeCard(
                 .fillMaxSize()
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.Start
-
         ) {
-            Text(
-                text = "Today i will try to " +output,
-                fontSize = 28.sp,
-                color = colorText,
-                fontFamily = FontFamily.Monospace
-            )
+            //Challenge Text
+            Row(
+                verticalAlignment = Alignment.Top,
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = "Today i will try to " + output,
+                    fontSize = 28.sp,
+                    color = colorText,
+                    fontFamily = FontFamily.Monospace
+                )
+            }
 
-            Image(
-                painter = painter1,
-                contentDescription = "",
-                contentScale = ContentScale.Crop
-            )
+            //Timer
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(0.dp, 0.dp, 0.dp, 24.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                if (!challenge?.description.isNullOrEmpty()){
+                    Text(
+                        text = time,
+                        fontSize = 68.sp,
+                        color = Color(0x2F535353)
+                    )
+                }
+            }
         }
     }
 }
