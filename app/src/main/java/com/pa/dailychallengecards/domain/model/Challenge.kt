@@ -9,7 +9,7 @@ data class Challenge(
     val id: Int? = null,
     val title: String,
     val description: String,
-    val difficulty: Int,
+    val difficulty: ChallengeDifficulty,
     val image: Int,
-    val status: String
+    val status: ChallengeStatus
 )

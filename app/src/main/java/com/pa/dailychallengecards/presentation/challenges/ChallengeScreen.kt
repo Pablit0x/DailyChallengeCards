@@ -142,8 +142,8 @@ fun addChallenge(id : Int, viewModel: ChallengesViewModel) : Int{
         title = "Test: $id",
         description = "be kind to someone i don't know",
         image = R.drawable.hmm,
-        difficulty = 0,
-        status = "Active"
+        difficulty = ChallengeDifficulty.EASY,
+        status = ChallengeStatus.Active
     )
     viewModel.addChallenge(newChallenge)
 
