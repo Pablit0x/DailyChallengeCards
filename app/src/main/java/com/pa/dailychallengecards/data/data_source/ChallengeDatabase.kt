@@ -17,6 +17,6 @@ abstract class ChallengeDatabase : RoomDatabase() {
     abstract val challengeDao: ChallengeDao
 
     companion object {
-        const val DATABASE_NAME = "challenges_db"
+        const val DATABASE_NAME = "challenges"
     }
 }

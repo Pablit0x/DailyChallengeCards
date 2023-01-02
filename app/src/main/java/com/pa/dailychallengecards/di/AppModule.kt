@@ -25,8 +25,10 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             ChallengeDatabase::class.java,
-            ChallengeDatabase.DATABASE_NAME
-        ).build()
+            ChallengeDatabase.DATABASE_NAME,
+        )
+            .createFromAsset("databases/challenges.db")
+            .build()
     }
 
     @Provides

@@ -30,7 +30,7 @@ fun ChallengeCard(
     timeLeft : Duration
 ) {
 
-    var time : String = ""+ timeLeft.toHours() +":"+ timeLeft.toMinutesPart() +":"+ timeLeft.toSecondsPart()
+//    var time : String = ""+ timeLeft.toHours() +":"+ timeLeft.toMinutesPart() +":"+ timeLeft.toSecondsPart()
 
     var fonts = FontFamily(
         Font(R.font.bebasneue_regular)
@@ -41,20 +41,9 @@ fun ChallengeCard(
     val f :DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
     if(!challenge?.description.isNullOrEmpty()){
         output = challenge!!.id.toString()
-        when(challenge!!.difficulty){
-            ChallengeDifficulty.EASY -> {
-                color = COLOUREASY
-                colorText = Color.Black
-            }
-            ChallengeDifficulty.HARD -> {
-                color = COLOURHARD
-                colorText = Color.White
-            }
-            else -> {
-                color = COLOURHARD
-                colorText = Color.White
-            }
-        }
+        color = COLOURHARD
+        colorText = Color.White
+
     } else {
         output = "..."
         color = Color.White
@@ -97,7 +86,7 @@ fun ChallengeCard(
             ) {
                 if (!challenge?.description.isNullOrEmpty()){
                     Text(
-                        text = time,
+                        text = "time",
                         fontSize = 68.sp,
                         color = Color(0x2F535353)
                     )

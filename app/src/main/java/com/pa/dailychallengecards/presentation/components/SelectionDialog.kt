@@ -64,6 +64,7 @@ fun SelectionDialog(
                         ) {
 
                         Text(
+                            modifier = Modifier.padding(2.dp,16.dp,2.dp,16.dp),
                             text = i.title,
                             fontSize = 24.sp)
                     }
@@ -92,7 +93,11 @@ fun SelectionDialog(
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                 ) {
-                    Text(text = "Select", fontSize = 16.sp)
+                    Text(
+                        modifier = Modifier.padding(2.dp,4.dp,2.dp,4.dp),
+                        text = "Select",
+                        fontSize = 16.sp
+                    )
                 }
             }
         }
